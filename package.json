@@ -1,0 +1,30 @@
+{
+  "name": "namastereact",
+  "version": "1.0.0",
+  "description": "This is Namaste React by Akshay Saini",
+  "keywords": [],
+  "homepage": "https://github.com/srushtikhatale45-sketch/React#readme",
+  "bugs": {
+    "url": "https://github.com/srushtikhatale45-sketch/React/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/srushtikhatale45-sketch/React.git"
+  },
+  "license": "ISC",
+  "author": "Srushti",
+  "type": "commonjs",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "browserlist":[
+  "last 2 versions"]
+  
+}
