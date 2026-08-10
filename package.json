@@ -15,7 +15,9 @@
   "author": "Srushti",
   "type": "commonjs",
   "scripts": {
-    "test": "jest"
+    "start":"parcel index.html",
+    "test": "jest",
+    "build":"parcel build index.html"
   },
   "devDependencies": {
     "parcel": "^2.16.4"

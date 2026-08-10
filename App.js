@@ -1,40 +1,19 @@
-/*
-
-<div id="parent">
-   <div id="child">
-   <h1>Hello World From React</h1>
-   </div>
-</div>
-
- 
- 
- 
- 
- 
- */
 import React from "react";
 import ReactDOM from "react-dom/client";
-const parent = React.createElement(
-  "div",
-  { id: "parent" },
-  [
-  React.createElement("div", { id: "child" }, [
-    React.createElement("h1", {}, "This is Namaste React Chapter 1"),
-    React.createElement("h2", {}, "Hello I am Child 2"),
-  ]),React.createElement("div", { id: "child 2" }, [
-    React.createElement("h1", {}, "Hello I am Child 1 2"),
-    React.createElement("h2", {}, "Hello I am Child 2 2"),
-  ])]
-);
 
-const heading = React.createElement(
-  "h1",
-  { id: "heading" },
-  "Hello World From React",
-);
+//React.CreateElement =>Object => HTML(DOM)
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const heading = React.createElement("h1",{id:"heading"}, "Namaste React");
 
-console.log(parent); //object
 
-root.render(parent);
+
+
+
+
+
+const jsxHeading = <h1>Namaste React using JSX!</h1>
+
+const root=ReactDOM.createRoot(document.getElementById("root"));
+console.log(heading);
+root.render(heading);
+
