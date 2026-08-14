@@ -35,6 +35,7 @@ const HeadingComponent=()=>{
        <title></title>
         <h2>{number}</h2>
         <h1>Namaste React from function component</h1>
+        <h2>Function component present here</h2>
     </div>
     )
 }
