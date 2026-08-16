@@ -44,7 +44,9 @@ const Body=()=>{
             <div className="search">Search</div>
 
                 <div className="res-container">
-                  <RestaurantCard/>
+                  <RestaurantCard resName="Meghna Foods" cusine="Biryani,North Indian,Asian"/>
+                  <RestaurantCard resName="KFC" cusine="Fast Food,Burgers"/>
+                  
 
                  </div>
 
@@ -54,10 +56,16 @@ const Body=()=>{
     )
 }
 
-const RestaurantCard=()=>{
+
+const RestaurantCard=(props)=>{
+    console.log(props);
     return(
-        <div className="res-card">
-            <h3>Meghna Foods</h3>
+        <div className="res-card" style={{backgroundColor:"#b49999"}}>
+            <img className="res-logo" src="https://unsplash.com/photos/vegetable-and-meat-on-bowl-kcA-c3f_3FE" alt="Restaurant Logo"/>
+            <h3>{props.resName}</h3>
+            <h4>{props.cusine}</h4>
+            <h4>4.5 stars</h4>
+            <h4>38 minutes</h4>
 
         </div>
     )
