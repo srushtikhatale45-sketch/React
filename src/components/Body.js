@@ -4,26 +4,27 @@ import { useState,useEffect, use} from "react";
 import Shimmer from "./Shimmer";
 const Body=()=>{
 //Local State variable- Super Powerful Variable
-const [listOfRestaurant,setListOfRestaurant]=useState(resList);
-const[searchText,setSearchText]=useState([]);
+const [listOfRestaurant,setListOfRestaurant]=useState([]);
+const[searchText,setSearchText]=useState(" ");
  console.log("Body Rendered")
 
- const[filteredRestaurant,setfilteredRestaurant]=useState(resList);
+ const[filteredRestaurant,setfilteredRestaurant]=useState([]);
 
-//useEffect(()=>{
-//     fetchData();
-// },[])
+useEffect(()=>{
+    fetchData();
+},[])
 console.log("Body Rendered");
 
 const fetchData = async () => {
     const data = await fetch(
-        "https://www.swiggy.com/mapi/restaurants/list/update"
+        "https://corsproxy.io/?https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=19.9728896&lng=73.8229516&carousel=true&third_party_vendor=1"
     );
 
     const json = await data.json();
 
-    console.log(json);
-    setListOfRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+ 
+    setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setfilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 };
 //conditional renderring
 
@@ -43,7 +44,7 @@ const fetchData = async () => {
                         // searchText
                         console.log(searchText);
                         const filteredRestaurant=listOfRestaurant.filter((restaurant)=>{
-                            restaurant.info.name .toLowerCase().includes(searchText);
+                            return restaurant.info.name .toLowerCase().includes(searchText.toLowerCase());
                         });
                         setfilteredRestaurant(filteredRestaurant);
                     }}> Search</button>
