@@ -15,18 +15,19 @@
   "author": "Srushti",
   "type": "commonjs",
   "scripts": {
-    "start":"parcel index.html",
+    "start": "parcel index.html",
     "test": "jest",
-    "build":"parcel build index.html"
+    "build": "parcel build index.html"
   },
   "devDependencies": {
     "parcel": "^2.16.4"
   },
   "dependencies": {
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2"
   },
-  "browserlist":[
-  "last 2 versions"]
-  
+  "browserlist": [
+    "last 2 versions"
+  ]
 }

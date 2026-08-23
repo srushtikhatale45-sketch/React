@@ -4,11 +4,11 @@ import { useState,useEffect, use} from "react";
 import Shimmer from "./Shimmer";
 const Body=()=>{
 //Local State variable- Super Powerful Variable
-const [listOfRestaurant,setListOfRestaurant]=useState([]);
+const [listOfRestaurant,setListOfRestaurant]=useState(resList);
 const[searchText,setSearchText]=useState(" ");
  console.log("Body Rendered")
 
- const[filteredRestaurant,setfilteredRestaurant]=useState([]);
+ const[filteredRestaurant,setfilteredRestaurant]=useState(resList);
 
 useEffect(()=>{
     fetchData();
