@@ -1,6 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
-import { useState,useEffect, use} from "react";
+import { useState,useEffect} from "react";
 import Shimmer from "./Shimmer";
 const Body=()=>{
 //Local State variable- Super Powerful Variable
@@ -10,9 +10,9 @@ const[searchText,setSearchText]=useState(" ");
 
  const[filteredRestaurant,setfilteredRestaurant]=useState(resList);
 
-useEffect(()=>{
-    fetchData();
-},[])
+// useEffect(()=>{
+//     fetchData();
+// },[])
 console.log("Body Rendered");
 
 const fetchData = async () => {

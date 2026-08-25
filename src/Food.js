@@ -2,9 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import { createBrowserRouter,RouterProvider,Outlet } from "react-router-dom";
 import About from "./components/About";
 import ContactUs from "./components/ContactUs";
+import Error from "./components/Error";
+import RestaurantMenue from "./components/RestaurantMenue"
 /*
 Header
   -Logo
@@ -33,7 +35,8 @@ const AppLayout=()=>{
            {/* Body */}
            {/* Footer */}
               <Header/>
-              <Body/>
+              {/* if path is / */}
+              <Outlet/>
          </div>   
      )
 }
@@ -41,16 +44,28 @@ const appRouter=createBrowserRouter([
    {
       path:"/",
       element:<AppLayout/>,
-      errorElement:<Element/>
-   },
-   {
+      children:[
+      {
+      path:"/",
+      element:<Body/>,
+      },
+         {
       path:"/about",
       element:<About/>,
-   },
-   {
+      },
+      {
       path:"/contact",
       element:<ContactUs/>,
-   }
+      },
+      {
+      path:"/restaurant/:resId",
+      element:<RestaurantMenue/>,
+      }
+      ],
+      errorElement:<Error/>
+     
+   },
+   
    
 ]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
