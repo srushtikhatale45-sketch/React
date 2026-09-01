@@ -45,10 +45,10 @@ const appRouter=createBrowserRouter([
       path:"/",
       element:<AppLayout/>,
       children:[
-      {
-      path:"/",
-      element:<Body/>,
-      },
+      // {
+      // path:"/",
+      // element:<Body/>,
+      // },
          {
       path:"/about",
       element:<About/>,
