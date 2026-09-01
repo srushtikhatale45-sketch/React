@@ -4,10 +4,17 @@ import React from "react";
 class About extends React.Component{
     constructor(props) {
         super(props);
+
         //console.log("Parent Constructor");
     }
     componentDidMount(){
+        this.timer=setInterval(()=>{
+            console.log("Namaste React OPPS");
+        },1000)
        // console.log("Parent Component Did Mount");
+    }
+    componentWillUnmount(){
+        clearInterval(this.timer);
     }
 
     render(){

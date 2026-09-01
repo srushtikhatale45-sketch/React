@@ -26,11 +26,16 @@ class UserClass extends React.Component{
       this.setState({
         userInfo:json,
     })
-
+    
 
       console.log(json);
     }
+    componentDidUpdate(){
+        console.log("Component Did Update");
+    }
+    componentWillUnmount(){
 
+    }
     render(){
       //  console.log(this.props.name+"Child Render");
         const {name,location,avtar_url}=this.state.userInfo;
@@ -56,3 +61,22 @@ class UserClass extends React.Component{
     }
 }
 export default UserClass;
+
+
+/*
+<Mounting Phase>
+ constructor (dummy)
+ render(dummy)
+ <HTML dummy>
+  ComponentDidMount(
+    API call
+    this.setState() updated state variable 
+    )
+<Update Phase>
+
+  render(API data)
+  <HTML API data>
+  ComponentDidUpdate()//checks the updated state variable and re-render the component
+  ComponentWillUnmount()//when the component is removed from the DOM
+
+*/
