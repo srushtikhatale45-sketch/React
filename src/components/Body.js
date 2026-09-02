@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import resList from "../utils/mockData";
 import { useState,useEffect} from "react";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 const Body=()=>{
@@ -32,6 +33,9 @@ const fetchData = async () => {
 //Normal Js Variable
 // let listOfRetaurant=[];
 //Ternary Operator
+const onlineStatus=useOnlineStatus();
+if(onlineStatus===false) return <h1>Looking like you are offline! Please Check Your Internet Connection</h1>
+
     return listOfRestaurant.length==0?<Shimmer/>:(
         <div className="body">
             <div className="filter">
