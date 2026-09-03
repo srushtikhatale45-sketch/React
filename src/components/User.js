@@ -10,7 +10,7 @@ const User =({name}) =>{
         const json=data.json();
      },[])
     return(
-        <div className="user-card">
+        <div className="user-card m-4 p-4 bg-amber-400 rounded-lg">
             <h1>Count={count}</h1>
             <h2>Name:{name}</h2>
             <h3>Location:Nashik</h3>

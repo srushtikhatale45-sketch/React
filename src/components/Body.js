@@ -38,13 +38,13 @@ if(onlineStatus===false) return <h1>Looking like you are offline! Please Check Y
 
     return listOfRestaurant.length==0?<Shimmer/>:(
         <div className="body">
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="search-box" value={searchText} onChange={(e)=>{
+            <div className="filter flex">
+                <div className="search m-4 p-4">
+                    <input type="text" className="border border-solid border-black" value={searchText} onChange={(e)=>{
                         setSearchText(e.target.value);
                        
                     }}/>
-                    <button onClick={()=>{
+                    <button className="bg-green-100 m-4 px-4 py-2 rounded-lg" onClick={()=>{
                         // filter the restaurant cards and update the UI
                         // searchText
                         console.log(searchText);
@@ -55,7 +55,8 @@ if(onlineStatus===false) return <h1>Looking like you are offline! Please Check Y
                     }}> Search</button>
                    
                 </div>
-                <button className="filter-btn" onClick={()=>{
+                <div className="search m-4 p-4">
+                <button className="px-4 py-2 bg-gray-100" onClick={()=>{
                     
                     //Filter topic here
                    const filteredList= listOfRestaurant.filter(res=>res.info.avgRating > 4);
@@ -64,9 +65,10 @@ if(onlineStatus===false) return <h1>Looking like you are offline! Please Check Y
 
 
                 }} >Top Rated Retaurant</button>
+                </div>
             </div>
 
-                <div className="res-container">
+                <div className="flex-wrap rounded-lg">
                   {
                     filteredRestaurant.map((restaurant)=>{
                       return <Link key={restaurant.data.id} to={"/restaurant/"+ restaurant.data.id}><RestaurantCard  key={restaurant.info.id} resData={restaurant}/></Link>

@@ -5,11 +5,11 @@ const RestaurantCard=(props)=>{
 badgesV2, name, cuisines, avgRating, costForTwo, sla,id}=resData?.info;
   
         return(
-        <div className="res-card" style={{backgroundColor:"#b49999"}}>
-            <img className="res-logo" src={CDN_URL+badgesV2.
+        <div className="m-4 p-4 w-[200px] rounded-lg bg-gray-50 hover:bg-gray-200">
+            <img className="rounded-lg" src={CDN_URL+badgesV2.
 cloudinaryImageId
 } alt="Restaurant Logo"/>
-            <h3>{name}</h3>
+            <h3 className="font-bold py-4 text-xl">{name}</h3>
             <h4>{cuisines.join(", ")}</h4>
             <h4>{avgRating}</h4>
             <h4>{costForTwo} FOR TWO</h4>
