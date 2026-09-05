@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import { MENUE_URL } from "../utils/constants";
+import RestaurantCard from "../components/RestaurantCard";
 const useRestaurantMenueCard=(resId)=>{
     const [resInfo,setResInfo]=useState(null);
     useEffect(()=>{
@@ -8,9 +9,19 @@ const useRestaurantMenueCard=(resId)=>{
             const json=await data.json();
             setResInfo(json.data);
         }
+        fetchMenue();
     },[]);
 
     return resInfo;
 
+}
+export const withPromottedLabel=()=>{
+
+    return restaurantPromotted((props)=>{
+        <div className=" absolute m-2 p-2 bg-black text-white ">
+            <label>Promotted</label>
+            <RestaurantCard {...props}/>
+        </div>
+    })
 }
 export default useRestaurantMenueCard;

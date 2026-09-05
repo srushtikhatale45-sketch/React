@@ -1,83 +1,135 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
-import { useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-const Body=()=>{
-//Local State variable- Super Powerful Variable
-const [listOfRestaurant,setListOfRestaurant]=useState(resList);
-const[searchText,setSearchText]=useState(" ");
- console.log("Body Rendered")
+import { withPromottedLabel } from "../utils/useRestaurantMenueCard";
 
- const[filteredRestaurant,setfilteredRestaurant]=useState(resList);
+const Body = () => {
+    const [listOfRestaurant, setListOfRestaurant] = useState([]);
+    const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+    const [searchText, setSearchText] = useState("");
 
-// useEffect(()=>{
-//     fetchData();
-// },[])
-console.log("Body Rendered");
+    const onlineStatus = useOnlineStatus();
 
-const fetchData = async () => {
-    const data = await fetch(
-        "https://corsproxy.io/?https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=19.9728896&lng=73.8229516&carousel=true&third_party_vendor=1"
-    );
+    useEffect(() => {
+        fetchData();
+    }, []);
 
-    const json = await data.json();
+    const fetchData = async () => {
+        try {
+            const data = await fetch(
+                "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.3850&lng=78.4867&page_type=DESKTOP_WEB_LISTING1003414"
+            );
 
- 
-    setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setfilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-};
-//conditional renderring
+            const json = await data.json();
 
-//Normal Js Variable
-// let listOfRetaurant=[];
-//Ternary Operator
-const onlineStatus=useOnlineStatus();
-if(onlineStatus===false) return <h1>Looking like you are offline! Please Check Your Internet Connection</h1>
+            console.log(json);
 
-    return listOfRestaurant.length==0?<Shimmer/>:(
+            const restaurants =
+                json?.data?.cards?.[2]?.card?.card?.gridElements
+                    ?.infoWithStyle?.restaurants || [];
+
+            setListOfRestaurant(restaurants);
+            setFilteredRestaurant(restaurants);
+
+        } catch (error) {
+            console.error("Error fetching restaurant data:", error);
+        }
+    };
+
+    if (onlineStatus === false) {
+        return (
+            <h1>
+                Looking like you are offline!
+                Please Check Your Internet Connection
+            </h1>
+        );
+    }
+    const [restaurantPromotedLabel,setRestaurantWithPromoted] = withPromottedLabel(RestaurantCard);
+
+    if (listOfRestaurant.length === 0) {
+        return <Shimmer />;
+    }
+
+    return (
         <div className="body">
+
             <div className="filter flex">
-                <div className="search m-4 p-4">
-                    <input type="text" className="border border-solid border-black" value={searchText} onChange={(e)=>{
-                        setSearchText(e.target.value);
-                       
-                    }}/>
-                    <button className="bg-green-100 m-4 px-4 py-2 rounded-lg" onClick={()=>{
-                        // filter the restaurant cards and update the UI
-                        // searchText
-                        console.log(searchText);
-                        const filteredRestaurant=listOfRestaurant.filter((restaurant)=>{
-                            return restaurant.info.name .toLowerCase().includes(searchText.toLowerCase());
-                        });
-                        setfilteredRestaurant(filteredRestaurant);
-                    }}> Search</button>
-                   
-                </div>
-                <div className="search m-4 p-4">
-                <button className="px-4 py-2 bg-gray-100" onClick={()=>{
-                    
-                    //Filter topic here
-                   const filteredList= listOfRestaurant.filter(res=>res.info.avgRating > 4);
-                   setListOfRestaurant(filteredList);
-                    console.log(filteredList);
 
+                {/* Search */}
+                <div className="search m-4 p-4">
 
-                }} >Top Rated Retaurant</button>
+                    <input
+                        type="text"
+                        className="border border-solid border-black p-2"
+                        value={searchText}
+                        onChange={(e) => {
+                            setSearchText(e.target.value);
+                        }}
+                        placeholder="Search Restaurant"
+                    />
+
+                    <button
+                        className="bg-green-100 m-4 px-4 py-2 rounded-lg"
+                        onClick={() => {
+                            const filtered = listOfRestaurant.filter(
+                                (restaurant) =>
+                                    restaurant?.info?.name
+                                        ?.toLowerCase()
+                                        .includes(searchText.toLowerCase())
+                            );
+
+                            setFilteredRestaurant(filtered);
+                        }}
+                    >
+                        Search
+                    </button>
+
                 </div>
+
+                {/* Top Rated */}
+                <div className="search m-4 p-4">
+
+                    <button
+                        className="px-4 py-2 bg-gray-100"
+                        onClick={() => {
+                            const filteredList =
+                                listOfRestaurant.filter(
+                                    (restaurant) =>
+                                        restaurant?.info?.avgRating > 4
+                                );
+
+                            setFilteredRestaurant(filteredList);
+                        }}
+                    >
+                        Top Rated Restaurant
+                    </button>
+
+                </div>
+
             </div>
 
-                <div className="flex-wrap rounded-lg">
-                  {
-                    filteredRestaurant.map((restaurant)=>{
-                      return <Link key={restaurant.data.id} to={"/restaurant/"+ restaurant.data.id}><RestaurantCard  key={restaurant.info.id} resData={restaurant}/></Link>
-                    })}
-                 </div>
+            {/* Restaurant List */}
+            <div className="flex flex-wrap rounded-lg">
 
-             </div>
+                {filteredRestaurant.map((restaurant) => (
+                    <Link
+                        key={restaurant?.info?.id}
+                        to={"/restaurant/" + restaurant?.info?.id}
+                    >
+                        {
+                            
+                            <RestaurantCard
+                            resData={restaurant}
+                        />}
+                    </Link>
+                ))}
 
+            </div>
 
-    )
-}
+        </div>
+    );
+};
+
 export default Body;

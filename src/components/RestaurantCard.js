@@ -1,21 +1,56 @@
 import { CDN_URL } from "../utils/constants";
-const RestaurantCard=(props)=>{
-       const {resData}=props;
-       const{
-badgesV2, name, cuisines, avgRating, costForTwo, sla,id}=resData?.info;
+
+const RestaurantCard = (props) => {
+    const { resData } = props;
+
+    const {
+        name,
+        cuisines,
+        avgRating,
+        costForTwo,
+        sla,
+    } = resData?.info || {};
+
+    const {cloudinaryImageId}=resData?.info|| {};
   
-        return(
+
+    const imageUrl = cloudinaryImageId
+        ? CDN_URL + cloudinaryImageId
+        : "/no-image.png";
+
+    
+
+    return (
         <div className="m-4 p-4 w-[200px] rounded-lg bg-gray-50 hover:bg-gray-200">
-            <img className="rounded-lg" src={CDN_URL+badgesV2.
-cloudinaryImageId
-} alt="Restaurant Logo"/>
-            <h3 className="font-bold py-4 text-xl">{name}</h3>
-            <h4>{cuisines.join(", ")}</h4>
-            <h4>{avgRating}</h4>
-            <h4>{costForTwo} FOR TWO</h4>
-            <h4>{sla?.slaString}</h4>
+            <img
+                className="rounded-lg w-full h-[150px] object-cover"
+                src={imageUrl}
+                alt={name || "Restaurant"}
+                
+            />
+
+            <h3 className="font-bold py-4 text-xl">
+                {name}
+            </h3>
+
+            <h4>
+                {cuisines?.join(", ")}
+            </h4>
+
+            <h4>
+                ⭐ {avgRating}
+            </h4>
+
+            <h4>
+                {costForTwo} FOR TWO
+            </h4>
+
+            <h4>
+                {sla?.slaString}
+            </h4>
 
         </div>
-    )
-}
+    );
+};
+
 export default RestaurantCard;
