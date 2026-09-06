@@ -52,5 +52,19 @@ const RestaurantCard = (props) => {
         </div>
     );
 };
+//Higher Order Component(HOC) is a function which takes a component as an argument and returns a new component with additional functionality or modified behavior. HOCs are used to reuse component logic, enhance components, and separate concerns in React applications. 
+// 
+
+export const withPromottedLabel=(RestaurantCard)=>{
+
+    return (props)=>{
+        return(
+            <div>
+                <label className="bg-black text-white m-2 p-2  rounded-lg">Promoted</label>
+                <RestaurantCard {...props}/>
+            </div>
+        )
+}
+};
 
 export default RestaurantCard;

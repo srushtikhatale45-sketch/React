@@ -1,9 +1,9 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard,{withPromottedLabel} from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import { withPromottedLabel } from "../utils/useRestaurantMenueCard";
+
 
 const Body = () => {
     const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -46,7 +46,7 @@ const Body = () => {
             </h1>
         );
     }
-    const [restaurantPromotedLabel,setRestaurantWithPromoted] = withPromottedLabel(RestaurantCard);
+    const RestaurantPromotedLabel = withPromottedLabel(RestaurantCard);
 
     if (listOfRestaurant.length === 0) {
         return <Shimmer />;
@@ -118,11 +118,12 @@ const Body = () => {
                         key={restaurant?.info?.id}
                         to={"/restaurant/" + restaurant?.info?.id}
                     >
-                        {
-                            
-                            <RestaurantCard
+                        {/* if the restaurant having the label promotted then add the restaurant as a promotted */}
+                        {restaurant.info.promoted?<RestaurantPromotedLabel resData={restaurant}/>:  <RestaurantCard
                             resData={restaurant}
                         />}
+                        {
+                          }
                     </Link>
                 ))}
 

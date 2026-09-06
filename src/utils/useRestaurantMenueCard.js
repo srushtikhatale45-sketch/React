@@ -15,13 +15,5 @@ const useRestaurantMenueCard=(resId)=>{
     return resInfo;
 
 }
-export const withPromottedLabel=()=>{
 
-    return restaurantPromotted((props)=>{
-        <div className=" absolute m-2 p-2 bg-black text-white ">
-            <label>Promotted</label>
-            <RestaurantCard {...props}/>
-        </div>
-    })
-}
 export default useRestaurantMenueCard;
